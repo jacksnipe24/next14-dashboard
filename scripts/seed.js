@@ -1,4 +1,3 @@
-const { db } = require('@vercel/postgres');
 const {
   invoices,
   customers,
@@ -6,6 +5,18 @@ const {
   users,
 } = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
+
+var typeorm = require("typeorm")
+
+var dataSource = new typeorm.DataSource({
+  type: "mysql",
+  host: "localhost",
+  port: 3306,
+  username: "root",
+  database: "next-dashboard",
+  migrations: [__dirname + '/migrations/**/*.js'],
+  entities: []
+})
 
 async function seedUsers(client) {
   try {
